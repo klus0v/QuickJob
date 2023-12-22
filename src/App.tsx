@@ -7,10 +7,10 @@ import style from './App.module.css';
 function App() {
   return (
     <div className={style.container}>
-      <Hero />
-      <Who />
+      {/* <Hero />
+      <Who /> */}
       <Work />
-      <Contact />
+      {/* <Contact /> */}
     </div>
   );
 }
