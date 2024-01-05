@@ -1,0 +1,42 @@
+.popup {
+    padding: 20px 30px;
+}
+.links {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+.link {
+    font-size: 30px;
+    font-weight: 600;
+    color: #c8c8c8;
+}
+.activeLink {
+    color: black;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.wrapper input {
+    outline: none;
+    height: 32px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+.wrapper button {
+    height: 32px;
+    border: none;
+    outline: none;
+    background-color: #2664ff;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: 'Montserrat Variable';
+    font-weight: 500;
+    margin-top: 12px;
+}
+.forgotPassword {
+    color: #7299fb;
+    margin-top: 12px;
+}

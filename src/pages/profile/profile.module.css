@@ -1,0 +1,112 @@
+.container {
+    font-family: 'Montserrat Variable';
+}
+
+/* INTRO */
+.intro {
+    position: absolute;
+    width: 100vw;
+    height: 480px;
+    background-color: #2951b6;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 20px;
+    padding-top: 64px;
+    z-index: -1;
+
+    background-image: url('../../assets/intro_university.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.main {
+    margin-top: 54px;
+    padding-top: 20px;
+    background-color: #e4ecff;
+    border-radius: 16px;
+    padding: 30px;
+    display: flex;
+    gap: 24px;
+}
+.leftCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 360px;
+}
+.employerCard {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px 20px;
+}
+.employerAvatarName {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.employerAvatar {
+    border-radius: 16px;
+    background-color: #d9d9d9;
+    height: 0;
+    width: 100%;
+    padding-bottom: 100%;
+}
+.employerName {
+    font-weight: 600;
+    font-size: 24px;
+}
+.employerContacts {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    grid-row-gap: 20px;
+    align-items: center;
+    margin-top: 24px;
+}
+.contactIcon {
+    color: #002fa7;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.button {
+    border: none;
+    outline: none;
+    background-color: #2664ff;
+    color: #fff;
+    text-align: center;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 4px;
+}
+.buttons :last-child {
+    color: black;
+    background-color: #fff;
+}
+
+.rightCard {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.info {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px 20px;
+}
+.tableInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 20px;
+}
+.historyList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

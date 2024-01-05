@@ -1,0 +1,29 @@
+/* SORT */
+
+.sort {
+    background-color: #fff;
+    border-radius: 20px;
+}
+.sortHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 32px;
+    line-height: 32px;
+    font-weight: 500;
+    background-color: #c6ddff;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+.radioButtons {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    gap: 16px;
+}
+.radioButton {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

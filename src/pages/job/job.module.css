@@ -1,0 +1,145 @@
+.container {
+    font-family: 'Montserrat Variable';
+}
+
+/* INTRO */
+.intro {
+    position: absolute;
+    width: 100vw;
+    height: 480px;
+    background-color: #2951b6;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 20px;
+    padding-top: 64px;
+    z-index: -1;
+
+    background-image: url('../../assets/intro_university.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.main {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+.backPageLink {
+    color: #fff;
+    text-decoration: none;
+}
+.mainCard {
+    margin-top: 20px;
+    background-color: #e4ecff;
+    border-radius: 16px;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 16px;
+}
+.leftCard {
+    border-radius: 20px;
+    background-color: #fff;
+    padding: 20px;
+    flex: 1;
+}
+.titleCard {
+    font-size: 32px;
+    font-weight: 600;
+}
+.price {
+    font-size: 20px;
+    font-weight: 600;
+    color: #002fa7;
+    margin-top: 16px;
+}
+.description {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-row-gap: 28px;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 32px;
+}
+.heading {
+    font-size: 16px;
+    font-weight: 600;
+}
+.rightCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 250px;
+}
+.employerCard {
+    background-color: #fff;
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 20px 10px;
+}
+.employerAvatarName {
+    display: flex;
+    gap: 16px;
+}
+.employerAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+}
+.employerNameStar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.employerName {
+    font-weight: 600;
+    font-size: 16px;
+}
+.stars {
+    background-color: #2664ff;
+    color: #fff;
+    border-radius: 4px;
+    padding: 2px 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+.stars span {
+    color: #ffeb00;
+    display: flex;
+    align-items: center;
+}
+.employerContacts {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    grid-row-gap: 16px;
+    align-items: center;
+    margin-top: 24px;
+}
+.contactIcon {
+    color: #002fa7;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.button {
+    border: none;
+    outline: none;
+    background-color: #2664ff;
+    color: #fff;
+    text-align: center;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 4px;
+}
+.buttons :last-child {
+    color: black;
+    background-color: #fff;
+}
