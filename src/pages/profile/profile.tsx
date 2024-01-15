@@ -1,10 +1,8 @@
-import { FaStar } from 'react-icons/fa6';
 import Layout from '../../components/layout/layout';
 import styles from './profile.module.css';
 import { FiPhone } from 'react-icons/fi';
 import { LuMail } from 'react-icons/lu';
 import { LiaTelegram } from 'react-icons/lia';
-import { HiOutlineLocationMarker } from 'react-icons/hi';
 
 function Profile() {
     return (

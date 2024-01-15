@@ -7,6 +7,7 @@ import ErrorPage from './pages/error/error.tsx';
 import Job from './pages/job/job.tsx';
 import History from './pages/history/history.tsx';
 import Profile from './pages/profile/profile.tsx';
+import CreateJob from './pages/createJob/createJob.tsx';
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,14 @@ const router = createBrowserRouter([
     {
         path: '/profile',
         element: <Profile />,
+    },
+    {
+        path: '/job/create',
+        element: <CreateJob />,
+    },
+    {
+        path: '/job/id',
+        element: <CreateJob />,
     },
 ]);
 
