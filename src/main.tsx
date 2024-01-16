@@ -32,8 +32,8 @@ const router = createBrowserRouter([
         element: <CreateJob />,
     },
     {
-        path: '/job/id',
-        element: <CreateJob />,
+        path: '/job/:id',
+        element: <Job />,
     },
 ]);
 

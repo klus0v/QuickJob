@@ -3,8 +3,10 @@ import styles from './vacancyCard.module.css';
 import { CgCreditCard } from 'react-icons/cg';
 import { FoundItemOrder } from '../../../constants/types';
 import { PaymentType } from '../../../constants/enums';
+import { useNavigate } from 'react-router-dom';
 
 const VacancyCard = (props: FoundItemOrder) => {
+    const navigate = useNavigate();
     return (
         <>
             <div className={styles.card}>
@@ -21,14 +23,13 @@ const VacancyCard = (props: FoundItemOrder) => {
                             </div>
                             <div className={styles.icon}>
                                 <FaRegUser />
-                                {props.approvedResponsesCount} / {props.limit}
-                                чел
+                                {props.approvedResponsesCount}/{props.limit} чел
                             </div>
                             <div className={styles.icon}>
                                 <CgCreditCard />
                                 {props.paymentType == PaymentType.Card
-                                    ? 'переводом'
-                                    : 'на карту'}
+                                    ? 'безналичными'
+                                    : 'наличными'}
                             </div>
                         </div>
                     </div>
@@ -36,7 +37,14 @@ const VacancyCard = (props: FoundItemOrder) => {
                         {props.price} руб/час
                     </div>
                 </div>
-                <button className={styles.cardButton}>Откликнуться</button>
+                <button
+                    className={styles.cardButton}
+                    onClick={() =>
+                        navigate(`job/${props.id}`, { state: props })
+                    }
+                >
+                    Подробнее
+                </button>
             </div>
         </>
     );

@@ -81,8 +81,8 @@ const orders: FrontObject = {
             limit: 3,
             workHours: 8,
             price: 800,
-            createDateTime: new Date('2024-01-17T10:30'),
-            editDateTime: null,
+            createDateTime: new Date('2024-01-10T10:30'),
+            editDateTime: new Date('2024-01-12T10:30'),
         },
         {
             id: '3',
