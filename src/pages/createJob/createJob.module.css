@@ -68,3 +68,8 @@
     font-weight: 500;
     margin-top: 32px;
 }
+.error {
+    color: red;
+    font-size: 12px;
+    transform: translateY(6px);
+}

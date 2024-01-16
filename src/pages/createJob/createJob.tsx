@@ -26,19 +26,21 @@ function CreateJob() {
                         onSubmit={handleSubmit(onSubmit)}
                     >
                         <label>Укажите название задания</label>
+                        <span className={styles.error}>
+                            {errors.title && 'Обязательное поле'}
+                        </span>
                         <input
                             type="text"
                             placeholder="Название задания"
                             {...register('title', {
                                 required: true,
-                                maxLength: 30,
                             })}
                         />
-                        <span className={styles.error}>
-                            {errors.title?.message}
-                        </span>
 
                         <label>Выберите категорию задания</label>
+                        <span className={styles.error}>
+                            {errors.categories && 'Обязательное поле'}
+                        </span>
                         <input
                             type="text"
                             placeholder="Выберите категорию"
@@ -46,11 +48,11 @@ function CreateJob() {
                                 required: true,
                             })}
                         />
-                        <span className={styles.error}>
-                            {errors.categories?.message}
-                        </span>
 
                         <label>Укажите адрес</label>
+                        <span className={styles.error}>
+                            {errors.address && 'Обязательное поле'}
+                        </span>
                         <input
                             type="text"
                             placeholder="Город, улица, дом"
@@ -58,11 +60,11 @@ function CreateJob() {
                                 required: true,
                             })}
                         />
-                        <span className={styles.error}>
-                            {errors.address?.message}
-                        </span>
 
                         <label>Укажите время начала выполнения задания</label>
+                        <span className={styles.error}>
+                            {errors.startDateTime && 'Обязательное поле'}
+                        </span>
                         <input
                             type="datetime-local"
                             placeholder="Город, улица, дом"
@@ -70,11 +72,11 @@ function CreateJob() {
                                 required: true,
                             })}
                         />
-                        <span className={styles.error}>
-                            {errors.startDateTime?.message}
-                        </span>
 
                         <label>Укажите конечное выполнения задания</label>
+                        <span className={styles.error}>
+                            {errors.endDateTime && 'Обязательное поле'}
+                        </span>
                         <input
                             type="datetime-local"
                             placeholder="Город, улица, дом"
@@ -82,13 +84,13 @@ function CreateJob() {
                                 required: true,
                             })}
                         />
-                        <span className={styles.error}>
-                            {errors.endDateTime?.message}
-                        </span>
 
                         <label>
                             Сколько человек требуется для выполнения задания
                         </label>
+                        <span className={styles.error}>
+                            {errors.limit && 'Обязательное поле'}
+                        </span>
                         <input
                             type="number"
                             placeholder="Количество человек"
@@ -96,13 +98,13 @@ function CreateJob() {
                                 required: true,
                             })}
                         />
-                        <span className={styles.error}>
-                            {errors.limit?.message}
-                        </span>
 
                         <label>
                             Укажите примерное время выполнения в часах
                         </label>
+                        <span className={styles.error}>
+                            {errors.workHours && 'Обязательное поле'}
+                        </span>
                         <input
                             type="number"
                             placeholder="Примерное время выполнения"
@@ -110,11 +112,11 @@ function CreateJob() {
                                 required: true,
                             })}
                         />
-                        <span className={styles.error}>
-                            {errors.limit?.message}
-                        </span>
 
                         <label>Укажите размер оплаты</label>
+                        <span className={styles.error}>
+                            {errors.price && 'Обязательное поле'}
+                        </span>
                         <input
                             type="number"
                             placeholder="Размер оплаты"
@@ -122,11 +124,11 @@ function CreateJob() {
                                 required: true,
                             })}
                         />
-                        <span className={styles.error}>
-                            {errors.price?.message}
-                        </span>
 
                         <label>Укажите тип оплаты</label>
+                        <span className={styles.error}>
+                            {errors.paymentType && 'Обязательное поле'}
+                        </span>
                         <input
                             type="text"
                             placeholder="Тип оплаты"
@@ -134,11 +136,11 @@ function CreateJob() {
                                 required: true,
                             })}
                         />
-                        <span className={styles.error}>
-                            {errors.paymentType?.message}
-                        </span>
 
                         <label> Уточните детали задания</label>
+                        <span className={styles.error}>
+                            {errors.description && 'Обязательное поле'}
+                        </span>
                         <textarea
                             {...register('description')}
                             placeholder="Подробное описание задания"
@@ -151,9 +153,13 @@ function CreateJob() {
                             {...register('files')}
                             className={styles.input}
                         />
+
                         <label>
                             Перечислите через пробел необходимые навыки
                         </label>
+                        <span className={styles.error}>
+                            {errors.skills && 'Обязательное поле'}
+                        </span>
                         <input
                             type="text"
                             placeholder="Навыки"
@@ -161,9 +167,7 @@ function CreateJob() {
                                 required: true,
                             })}
                         />
-                        <span className={styles.error}>
-                            {errors.skills?.message}
-                        </span>
+
                         <button type="submit">Опубликовать</button>
                     </form>
                 </div>

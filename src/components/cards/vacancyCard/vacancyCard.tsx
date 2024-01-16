@@ -1,36 +1,40 @@
 import { FaRegClock, FaRegUser } from 'react-icons/fa6';
 import styles from './vacancyCard.module.css';
 import { CgCreditCard } from 'react-icons/cg';
+import { FoundItemOrder } from '../../../constants/types';
+import { PaymentType } from '../../../constants/enums';
 
-const VacancyCard = () => {
+const VacancyCard = (props: FoundItemOrder) => {
     return (
         <>
             <div className={styles.card}>
                 <div className={styles.cardMain}>
                     <div className={styles.cardContent}>
-                        <div className={styles.cardTitle}>
-                            Видеосъемка мероприятия Хоровод УрФУ
-                        </div>
+                        <div className={styles.cardTitle}>{props.title}</div>
                         <div className={styles.cardDescription}>
-                            Фотограф в команду. Съемки мероприятия. Надо делать
-                            фотографии высокого качества, творческая работа с
-                            портретными фото, в отличие от того, как обычно
-                            фотографируют выпускные.
+                            {props.description}
                         </div>
                         <div className={styles.cardIcons}>
                             <div className={styles.icon}>
-                                <FaRegClock />4 часа
+                                <FaRegClock />
+                                {props.workHours} ч
                             </div>
                             <div className={styles.icon}>
-                                <FaRegUser />3 человека
+                                <FaRegUser />
+                                {props.approvedResponsesCount} / {props.limit}
+                                чел
                             </div>
                             <div className={styles.icon}>
                                 <CgCreditCard />
-                                по факту
+                                {props.paymentType == PaymentType.Card
+                                    ? 'переводом'
+                                    : 'на карту'}
                             </div>
                         </div>
                     </div>
-                    <div className={styles.cardPrice}>250 руб/час</div>
+                    <div className={styles.cardPrice}>
+                        {props.price} руб/час
+                    </div>
                 </div>
                 <button className={styles.cardButton}>Откликнуться</button>
             </div>

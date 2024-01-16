@@ -25,7 +25,7 @@ export interface Job {
     categories: string[];
     description: string;
     endDateTime: Date;
-    files: File;
+    files: File | null;
     limit: number;
     paymentType: PaymentType;
     price: number;
@@ -33,4 +33,42 @@ export interface Job {
     startDateTime: Date;
     title: string;
     workHours: number;
+}
+
+export interface UserResponse {
+    // id: string;
+    userId: string;
+    orderId: string;
+    userFio: string;
+    status: string;
+}
+
+export interface FoundItemOrder {
+    id: string;
+    approvedResponsesCount: number;
+    totalResponsesCount: number;
+    customerId: string;
+    responses: UserResponse[];
+    // responseStatus: string;
+    fileUrls: string[];
+    isActive: boolean;
+    paymentType: PaymentType;
+    currentUserIsCustomer: boolean;
+    title: string;
+    description: string;
+    address: string;
+    startDateTime: Date;
+    endDateTime: Date;
+    categories: string[];
+    skills: string[];
+    limit: number;
+    workHours: number;
+    price: number;
+    createDateTime: Date;
+    editDateTime: Date | null;
+}
+
+export interface FrontObject {
+    foundItems: FoundItemOrder[];
+    totalCount: number;
 }

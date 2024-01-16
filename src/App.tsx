@@ -4,6 +4,7 @@ import Layout from './components/layout/layout';
 import VacancyCard from './components/cards/vacancyCard/vacancyCard';
 import SortCard from './components/cards/sortMainCard/sortCard';
 import { categories } from './data/categories';
+import orders from './data/orders';
 
 function App() {
     return (
@@ -53,9 +54,9 @@ function App() {
                 <div className={styles.recommendationsSorting}>
                     <div className={styles.recommendations}>
                         <div className={styles.title}>Рекомендации</div>
-                        <VacancyCard />
-                        <VacancyCard />
-                        <VacancyCard />
+                        {orders.foundItems.map(order => (
+                            <VacancyCard {...order} key={order.id} />
+                        ))}
                     </div>
                     <div className={styles.sorting}>
                         <SortCard />
