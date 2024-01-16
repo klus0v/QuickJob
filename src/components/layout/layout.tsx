@@ -2,32 +2,30 @@ import { TbLogin2, TbSearch } from 'react-icons/tb';
 import styles from './layout.module.css';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { useState } from 'react';
-import { useOutsideClick } from '../../shared/hooks';
-import Login from '../popups/auth/login';
 import AuthPopup from '../popups/auth/auth';
+import { Link } from 'react-router-dom';
 
 const Layout = () => {
     const [isOpenAuthPOpup, setOpenAuthPOpup] = useState(false);
-    const refShowAuthPopup = useOutsideClick(() => setOpenAuthPOpup(false));
 
     return (
         <>
             <div className={styles.header}>
-                <div className={styles.logo}>
+                <Link to="/" className={styles.logo}>
                     Quick<span>Job</span>
-                </div>
+                </Link>
 
                 <div className={styles.headerLinks}>
                     <div className={styles.links}>
-                        <a className={styles.link} href="#">
+                        <Link className={styles.link} to="/job/create">
                             Создать заказ
-                        </a>
-                        <a className={styles.link} href="#">
+                        </Link>
+                        <Link className={styles.link} to="/">
                             Найти задание
-                        </a>
-                        <a className={styles.link} href="#">
+                        </Link>
+                        <Link className={styles.link} to="/history">
                             Мои заказы
-                        </a>
+                        </Link>
                     </div>
 
                     <div className={styles.icons}>
