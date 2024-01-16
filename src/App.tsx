@@ -1,21 +1,9 @@
 import styles from './App.module.css';
 import '@fontsource-variable/montserrat';
-import {
-    HiOutlineCamera,
-    HiOutlineUserGroup,
-    HiOutlineAcademicCap,
-} from 'react-icons/hi';
-import { LuTruck } from 'react-icons/lu';
 import Layout from './components/layout/layout';
 import VacancyCard from './components/cards/vacancyCard/vacancyCard';
 import SortCard from './components/cards/sortMainCard/sortCard';
-
-const categories: { icon: React.ReactNode; name: string }[] = [
-    { icon: <HiOutlineCamera />, name: 'Фото/видеосъемка' },
-    { icon: <HiOutlineUserGroup />, name: 'Мероприятия' },
-    { icon: <HiOutlineAcademicCap />, name: 'Помощь с ДЗ' },
-    { icon: <LuTruck />, name: 'Тех. бригада' },
-];
+import { categories } from './data/categories';
 
 function App() {
     return (
