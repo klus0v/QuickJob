@@ -5,7 +5,7 @@ const Responses = () => {
     return (
         <div className={styles.rightCard}>
             <div className={styles.employerCard}>
-                <h1>Отклики</h1>
+                <span>Отклики</span>
                 <UserCard name="Ангелина Аверина" />
                 <UserCard name="Ангелина Аверина" />
                 <UserCard name="Ангелина Аверина" />

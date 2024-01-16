@@ -27,6 +27,7 @@
 .backPageLink {
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 .mainCard {
     margin-top: 20px;
@@ -41,7 +42,7 @@
     border-radius: 20px;
     background-color: #fff;
     padding: 20px;
-    flex: 1;
+    flex: 2;
 }
 .titleCard {
     font-size: 32px;
@@ -75,16 +76,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-width: 350px;
+    flex: 1;
 }
 .employerCard {
     background-color: #fff;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 16px;
     padding: 20px 10px;
     height: 300px;
     overflow: auto;
     overflow-x: hidden;
+}
+.employerCard span {
+    font-size: 22px;
+    font-weight: 600;
 }
 .employerAvatarName {
     display: flex;
@@ -123,14 +128,14 @@
 }
 .employerContacts {
     display: grid;
-    grid-template-columns: 30px 1fr;
+    grid-template-columns: 32px 1fr;
     grid-row-gap: 16px;
     align-items: center;
     margin-top: 24px;
 }
 .contactIcon {
     color: #002fa7;
-    font-size: 18px;
+    font-size: 22px;
     display: flex;
     align-items: center;
 }
