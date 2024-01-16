@@ -3,8 +3,8 @@ import '@fontsource-variable/montserrat';
 import Layout from './components/layout/layout';
 import VacancyCard from './components/cards/vacancyCard/vacancyCard';
 import SortCard from './components/cards/sortMainCard/sortCard';
-import { categories } from './data/categories';
-import orders from './data/orders';
+import { categories } from './data/categories.data';
+import orders from './data/orders.data';
 
 function App() {
     return (
