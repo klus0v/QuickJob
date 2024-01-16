@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../store/store';
 
 export const useOutsideClick = (callback: () => void) => {
     const ref = useRef<HTMLDivElement>(null);
@@ -18,3 +20,6 @@ export const useOutsideClick = (callback: () => void) => {
 
     return ref;
 };
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

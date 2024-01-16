@@ -8,6 +8,8 @@ import Job from './pages/job/job.tsx';
 import History from './pages/history/history.tsx';
 import Profile from './pages/profile/profile.tsx';
 import CreateJob from './pages/createJob/createJob.tsx';
+import { Provider } from 'react-redux';
+import store from './store/store.ts';
 
 const router = createBrowserRouter([
     {
@@ -39,6 +41,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <Provider store={store}>
+            <RouterProvider router={router} />
+        </Provider>
     </React.StrictMode>,
 );

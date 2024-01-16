@@ -72,3 +72,21 @@ export interface FrontObject {
     foundItems: FoundItemOrder[];
     totalCount: number;
 }
+
+export interface ApiQueryParamsOrders {
+    query?: string;
+    tagsList?: string;
+    paymentType?: 'Cash' | 'Card' | 'Other';
+    startDateTimeAfter?: string;
+    endDateTimeBefore?: string;
+    sortField?:
+        | 'CreateDateTime'
+        | 'EditDateTime'
+        | 'WorkHours'
+        | 'Limit'
+        | 'ApprovedResponsesCount'
+        | 'Price';
+    sortDirection?: 'Ascending' | 'Descending';
+    take?: number;
+    skip?: number;
+}

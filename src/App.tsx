@@ -4,9 +4,17 @@ import Layout from './components/layout/layout';
 import VacancyCard from './components/cards/vacancyCard/vacancyCard';
 import SortCard from './components/cards/sortMainCard/sortCard';
 import { categories } from './data/categories.data';
-import orders from './data/orders.data';
+import { useEffect } from 'react';
+import { getOrdersThunk } from './store/slices/orders.slice';
+import { useAppDispatch, useAppSelector } from './shared/hooks';
 
 function App() {
+    const dispatch = useAppDispatch();
+    const orders = useAppSelector(state => state.orders);
+
+    useEffect(() => {
+        dispatch(getOrdersThunk());
+    }, []);
     return (
         <div className={styles.container}>
             <Layout />
