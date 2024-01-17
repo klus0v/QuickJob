@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { LoginAuth, RegisAuth } from '../constants/types';
 import $api from './instance';
 

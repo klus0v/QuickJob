@@ -46,18 +46,24 @@ const authSlice = createSlice({
                 localStorage.setItem('accessToken', action.payload.accessToken);
             })
             .addCase(loginThunk.rejected, (state, action) => {
-                // state.isAuth = true;
+                if (
+                    action.payload &&
+                    action.payload.error &&
+                    action.payload.error.Message
+                ) {
+                    state.error = action.payload.error.Message;
+                } else {
+                    state.error = 'Unknown error occurred';
+                }
             })
 
             .addCase(registrationThunk.fulfilled, (state, action) => {
-                // state.userFormId = action.payload.userFormId;
-                // state.refreshToken = action.payload.refreshToken;
-                // state.isAuth = true;
-                // localStorage.setItem('refreshToken', action.payload.refreshToken);
+                state.isAuth = true;
+                state.accessToken = action.payload.accessToken;
+                localStorage.setItem('accessToken', action.payload.accessToken);
+                state.userFormId = action.payload.userFormId;
             })
             .addCase(registrationThunk.rejected, (state, action) => {
-                console.log(action);
-                console.log(action);
                 if (
                     action.payload &&
                     action.payload.error &&

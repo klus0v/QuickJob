@@ -2,6 +2,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Layout from '../../components/layout/layout';
 import styles from './createJob.module.css';
 import { Job } from '../../constants/types';
+import { useState } from 'react';
+import { useAppSelector } from '../../shared/hooks';
+import AuthPopup from '../../components/popups/auth/auth';
 
 function CreateJob() {
     const {
@@ -10,6 +13,9 @@ function CreateJob() {
         formState: { errors },
     } = useForm<Job>();
     const onSubmit: SubmitHandler<Job> = data => console.log(data);
+
+    const isAuth = useAppSelector(state => state.auth.isAuth);
+    const [isOpenAuthPOpup, setOpenAuthPOpup] = useState(!isAuth);
 
     return (
         <div className={styles.container}>
@@ -172,6 +178,7 @@ function CreateJob() {
                     </form>
                 </div>
             </div>
+            <AuthPopup isOpen={isOpenAuthPOpup} setIsOpen={setOpenAuthPOpup} />
         </div>
     );
 }
