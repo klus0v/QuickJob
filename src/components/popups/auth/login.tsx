@@ -1,10 +1,14 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './auth.module.css';
 import { LoginAuth } from '../../../constants/types';
+import { useAppDispatch } from '../../../shared/hooks';
+import { loginThunk } from '../../../store/slices/auth.slice';
 
 const Login = () => {
     const { register, handleSubmit } = useForm<LoginAuth>();
-    const onSubmit: SubmitHandler<LoginAuth> = data => console.log(data);
+    const dispatch = useAppDispatch();
+    const onSubmit: SubmitHandler<LoginAuth> = data =>
+        dispatch(loginThunk(data));
 
     return (
         <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
