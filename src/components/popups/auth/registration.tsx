@@ -1,12 +1,13 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './auth.module.css';
 import { RegisAuth } from '../../../constants/types';
-import { useAppDispatch } from '../../../shared/hooks';
+import { useAppDispatch, useAppSelector } from '../../../shared/hooks';
 import { registrationThunk } from '../../../store/slices/auth.slice';
 
 const Registration = () => {
     const { register, handleSubmit } = useForm<RegisAuth>();
     const dispatch = useAppDispatch();
+    const error = useAppSelector(state => state.auth.error);
 
     const onSubmit: SubmitHandler<RegisAuth> = data =>
         dispatch(registrationThunk(data));
@@ -34,6 +35,7 @@ const Registration = () => {
                 {...register('password')}
                 placeholder="Пароль"
             />
+            {error && <span className={styles.error}>{error}</span>}
             <button type="submit">Зарегистрироваться</button>
         </form>
     );

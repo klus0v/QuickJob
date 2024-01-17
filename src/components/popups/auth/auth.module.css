@@ -1,5 +1,6 @@
 .popup {
     padding: 20px 30px;
+    width: 350px;
 }
 .links {
     display: flex;
@@ -39,4 +40,7 @@
 .forgotPassword {
     color: #7299fb;
     margin-top: 12px;
+}
+.error {
+    color: red;
 }

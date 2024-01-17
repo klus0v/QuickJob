@@ -1,12 +1,19 @@
 import { TbLogin2, TbSearch } from 'react-icons/tb';
 import styles from './layout.module.css';
 import { IoNotificationsOutline } from 'react-icons/io5';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AuthPopup from '../popups/auth/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../shared/hooks';
 
 const Layout = () => {
     const [isOpenAuthPOpup, setOpenAuthPOpup] = useState(false);
+    const isAuth = useAppSelector(state => state.auth.isAuth);
+    const navigate = useNavigate();
+
+    const a = (link: string) => {
+        navigate(link);
+    };
 
     return (
         <>

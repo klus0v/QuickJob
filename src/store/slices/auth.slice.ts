@@ -4,11 +4,8 @@ import { AuthState, LoginAuth, RegisAuth } from '../../constants/types';
 
 const AUTH_STATE: AuthState = {
     email: '',
-    token: '',
-    accessToken: '',
-    refreshToken: '',
     isAuth: false,
-    error: '',
+    error: null,
 };
 export const loginThunk = createAsyncThunk(
     'auth/login',
@@ -25,8 +22,9 @@ export const registrationThunk = createAsyncThunk(
     async function (data: RegisAuth, { rejectWithValue }) {
         try {
             return await AuthService.registration(data);
-        } catch {
-            return rejectWithValue('Server Error!');
+        } catch (error: any) {
+            if (error.response && error.response.data)
+                return rejectWithValue({ error: error.response.data });
         }
     },
 );
@@ -42,30 +40,33 @@ const authSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-
             .addCase(loginThunk.fulfilled, (state, action) => {
-                // state.accessToken = action.payload.accessToken;
-                // state.refreshToken = action.payload.refreshToken;
-                // state.isAuth = true;
-                // localStorage.setItem('accessToken', action.payload.accessToken);
-                // localStorage.setItem(
-                //     'refreshToken',
-                //     action.payload.refreshToken,
-                // );
+                state.isAuth = true;
+                state.accessToken = action.payload.accessToken;
+                localStorage.setItem('accessToken', action.payload.accessToken);
             })
             .addCase(loginThunk.rejected, (state, action) => {
-                state.isAuth = true;
+                // state.isAuth = true;
             })
 
             .addCase(registrationThunk.fulfilled, (state, action) => {
-                // state.accessToken = action.payload.accessToken;
+                // state.userFormId = action.payload.userFormId;
                 // state.refreshToken = action.payload.refreshToken;
                 // state.isAuth = true;
-                // localStorage.setItem('accessToken', action.payload.accessToken);
                 // localStorage.setItem('refreshToken', action.payload.refreshToken);
             })
             .addCase(registrationThunk.rejected, (state, action) => {
-                state.isAuth = true;
+                console.log(action);
+                console.log(action);
+                if (
+                    action.payload &&
+                    action.payload.error &&
+                    action.payload.error.Message
+                ) {
+                    state.error = action.payload.error.Message;
+                } else {
+                    state.error = 'Unknown error occurred';
+                }
             });
     },
 });

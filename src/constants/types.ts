@@ -18,13 +18,14 @@ export interface LoginAuth {
     password: string;
 }
 export interface AuthState {
+    userFormId?: string;
     email: string;
     password?: string;
     token?: string;
     accessToken?: string;
     refreshToken?: string;
     isAuth?: boolean;
-    error?: string;
+    error?: string | null;
 }
 
 export interface Job {
