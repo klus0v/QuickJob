@@ -7,17 +7,24 @@ export interface PopupProps {
 }
 
 export interface RegisAuth {
-    firstName: string;
-    lastName: string;
-    age: number;
+    fio: string;
+    birthDate: number;
     phone: string;
     email: string;
     password: string;
 }
-
 export interface LoginAuth {
     email: string;
     password: string;
+}
+export interface AuthState {
+    email: string;
+    password?: string;
+    token?: string;
+    accessToken?: string;
+    refreshToken?: string;
+    isAuth?: boolean;
+    error?: string;
 }
 
 export interface Job {

@@ -9,18 +9,21 @@ const Registration = () => {
     return (
         <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
             <input
-                type="lastName"
-                {...register('lastName', { required: true, maxLength: 20 })}
-                placeholder="Фамилия"
+                type="name"
+                {...register('fio', { required: true })}
+                placeholder="ФИО"
+            />
+            <input type="date" {...register('birthDate', { required: true })} />
+            <input
+                type="tel"
+                {...register('phone', { required: true })}
+                placeholder="Телефон"
             />
             <input
-                type="firstName"
-                {...register('firstName', { required: true, maxLength: 20 })}
-                placeholder="Имя"
+                type="email"
+                {...register('email', { required: true })}
+                placeholder="Почта"
             />
-            <input type="date" {...register('age')} />
-            <input type="tel" {...register('phone')} placeholder="Телефон" />
-            <input type="email" {...register('email')} placeholder="Почта" />
             <input
                 type="password"
                 {...register('password')}
