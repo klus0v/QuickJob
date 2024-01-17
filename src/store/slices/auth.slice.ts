@@ -10,18 +10,7 @@ const AUTH_STATE: AuthState = {
     isAuth: false,
     error: '',
 };
-export const authLoginThunk = createAsyncThunk(
-    'auth/login',
-    async function (data: AuthState, { rejectWithValue }) {
-        try {
-            return await AuthService.login(data);
-        } catch (error: any) {
-            const message = error.response.data.Message;
-            return rejectWithValue(message);
-        }
-    },
-);
-export const authRegistrationThunk = createAsyncThunk(
+export const registrationThunk = createAsyncThunk(
     'auth/registration',
     async function (data: AuthState, { rejectWithValue }) {
         try {
@@ -29,13 +18,6 @@ export const authRegistrationThunk = createAsyncThunk(
         } catch {
             return rejectWithValue('Server Error!');
         }
-    },
-);
-
-export const refreshAccessToken = createAsyncThunk(
-    'auth/refreshAccessToken',
-    async (token: string) => {
-        return await AuthService.refreshToken(token);
     },
 );
 
@@ -49,35 +31,13 @@ const authSlice = createSlice({
         },
     },
     extraReducers: builder => {
-        builder
-            .addCase(authLoginThunk.fulfilled, (state, action) => {
-                state.accessToken = action.payload.accessToken;
-                state.refreshToken = action.payload.refreshToken;
-                state.isAuth = true;
-                localStorage.setItem('accessToken', action.payload.accessToken);
-                localStorage.setItem(
-                    'refreshToken',
-                    action.payload.refreshToken,
-                );
-            })
-            .addCase(authLoginThunk.rejected, (state, action) => {
-                if (typeof action.payload === 'string')
-                    state.error = action.payload;
-            })
-            .addCase(authRegistrationThunk.fulfilled, (state, action) => {
-                state.accessToken = action.payload.accessToken;
-                state.refreshToken = action.payload.refreshToken;
-                state.isAuth = true;
-                localStorage.setItem('accessToken', action.payload.accessToken);
-                localStorage.setItem(
-                    'refreshToken',
-                    action.payload.refreshToken,
-                );
-            })
-            .addCase(refreshAccessToken.fulfilled, (state, action) => {
-                state.accessToken = action.payload.accessToken;
-                localStorage.setItem('accessToken', action.payload.accessToken);
-            });
+        builder.addCase(registrationThunk.fulfilled, (state, action) => {
+            // state.accessToken = action.payload.accessToken;
+            // state.refreshToken = action.payload.refreshToken;
+            // state.isAuth = true;
+            // localStorage.setItem('accessToken', action.payload.accessToken);
+            // localStorage.setItem('refreshToken', action.payload.refreshToken);
+        });
     },
 });
 

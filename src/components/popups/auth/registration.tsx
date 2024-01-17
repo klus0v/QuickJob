@@ -1,10 +1,15 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './auth.module.css';
 import { RegisAuth } from '../../../constants/types';
+import { useAppDispatch } from '../../../shared/hooks';
+import { registrationThunk } from '../../../store/slices/auth.slice';
 
 const Registration = () => {
     const { register, handleSubmit } = useForm<RegisAuth>();
-    const onSubmit: SubmitHandler<RegisAuth> = data => console.log(data);
+    const dispatch = useAppDispatch();
+
+    const onSubmit: SubmitHandler<RegisAuth> = data =>
+        dispatch(registrationThunk(data));
 
     return (
         <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
