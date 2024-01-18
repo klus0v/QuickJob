@@ -1,7 +1,7 @@
 import $api from './instance';
 
 const getHistoryOrders = async (historyType: 'Worker' | 'Customer') => {
-    const response = await $api.get(`orders/history`, {
+    const response = await $api.get(`/users-api/orders/history`, {
         params: { historyType },
     });
 

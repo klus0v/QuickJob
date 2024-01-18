@@ -11,6 +11,11 @@ export default defineConfig({
                 changeOrigin: true,
                 rewrite: path => path.replace(/^\/api/, ''),
             },
+            '/users-api': {
+                target: 'http://51.250.93.99:7777',
+                changeOrigin: true,
+                rewrite: path => path.replace(/^\/users-api/, ''),
+            },
         },
     },
 });

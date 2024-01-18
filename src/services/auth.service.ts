@@ -6,14 +6,14 @@ const login = async (data: LoginAuth) => {
     formData.append('email', data.email);
     formData.append('password', data.password);
 
-    const response = await $api.post(`auth/login`, formData);
+    const response = await $api.post(`/api/auth/login`, formData);
 
     return response.data;
 };
 
 const registration = async (data: RegisAuth) => {
-    const responseReg = await $api.post(`registration/request`, data);
-    const responseConf = await $api.post(`registration/confirm`, {
+    const responseReg = await $api.post(`/api/registration/request`, data);
+    const responseConf = await $api.post(`/api/registration/confirm`, {
         userFormId: responseReg.data.userFormId,
         code: '0000',
     });
