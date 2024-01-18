@@ -1,10 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import NewsService from '../../services/orders.service';
-import {
-    ApiQueryParamsOrders,
-    FoundItemOrder,
-    FrontObject,
-} from '../../constants/types';
+import { FrontObject } from '../../constants/types';
 import HistoryService from '../../services/history.service';
 
 const HISTORY_STATE: FrontObject = {

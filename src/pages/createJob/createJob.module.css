@@ -43,7 +43,8 @@
     margin-top: 16px;
     font-weight: 600;
 }
-.wrapper input {
+.wrapper input,
+.wrapper select {
     margin-top: 8px;
     border: 1px solid #b9b7b7;
     outline: none;

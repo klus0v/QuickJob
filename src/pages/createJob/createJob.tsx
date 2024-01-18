@@ -3,8 +3,10 @@ import Layout from '../../components/layout/layout';
 import styles from './createJob.module.css';
 import { Job } from '../../constants/types';
 import { useState } from 'react';
-import { useAppSelector } from '../../shared/hooks';
+import { useAppDispatch, useAppSelector } from '../../shared/hooks';
 import AuthPopup from '../../components/popups/auth/auth';
+import { PaymentType } from '../../constants/enums';
+import { postOrdersThunk } from '../../store/slices/orders.slice';
 
 function CreateJob() {
     const {
@@ -12,7 +14,11 @@ function CreateJob() {
         handleSubmit,
         formState: { errors },
     } = useForm<Job>();
-    const onSubmit: SubmitHandler<Job> = data => console.log(data);
+
+    const dispatch = useAppDispatch();
+
+    const onSubmit: SubmitHandler<Job> = data =>
+        dispatch(postOrdersThunk(data));
 
     const isAuth = useAppSelector(state => state.auth.isAuth);
     const [isOpenAuthPOpup, setOpenAuthPOpup] = useState(!isAuth);
@@ -44,51 +50,29 @@ function CreateJob() {
                         />
 
                         <label>Выберите категорию задания</label>
-                        <span className={styles.error}>
-                            {errors.categories && 'Обязательное поле'}
-                        </span>
                         <input
                             type="text"
                             placeholder="Выберите категорию"
-                            {...register('categories', {
-                                required: true,
-                            })}
+                            {...register('categories')}
                         />
 
                         <label>Укажите адрес</label>
-                        <span className={styles.error}>
-                            {errors.address && 'Обязательное поле'}
-                        </span>
                         <input
                             type="text"
                             placeholder="Город, улица, дом"
-                            {...register('address', {
-                                required: true,
-                            })}
+                            {...register('address')}
                         />
 
                         <label>Укажите время начала выполнения задания</label>
-                        <span className={styles.error}>
-                            {errors.startDateTime && 'Обязательное поле'}
-                        </span>
                         <input
                             type="datetime-local"
-                            placeholder="Город, улица, дом"
-                            {...register('startDateTime', {
-                                required: true,
-                            })}
+                            {...register('startDateTime')}
                         />
 
                         <label>Укажите конечное выполнения задания</label>
-                        <span className={styles.error}>
-                            {errors.endDateTime && 'Обязательное поле'}
-                        </span>
                         <input
                             type="datetime-local"
-                            placeholder="Город, улица, дом"
-                            {...register('endDateTime', {
-                                required: true,
-                            })}
+                            {...register('endDateTime')}
                         />
 
                         <label>
@@ -135,18 +119,19 @@ function CreateJob() {
                         <span className={styles.error}>
                             {errors.paymentType && 'Обязательное поле'}
                         </span>
-                        <input
-                            type="text"
-                            placeholder="Тип оплаты"
+                        <select
                             {...register('paymentType', {
                                 required: true,
                             })}
-                        />
+                            defaultValue={PaymentType.Card}
+                        >
+                            <option value={PaymentType.Cash}>Наличные</option>
+                            <option value={PaymentType.Card}>
+                                Безналичные
+                            </option>
+                        </select>
 
                         <label> Уточните детали задания</label>
-                        <span className={styles.error}>
-                            {errors.description && 'Обязательное поле'}
-                        </span>
                         <textarea
                             {...register('description')}
                             placeholder="Подробное описание задания"
@@ -163,15 +148,10 @@ function CreateJob() {
                         <label>
                             Перечислите через пробел необходимые навыки
                         </label>
-                        <span className={styles.error}>
-                            {errors.skills && 'Обязательное поле'}
-                        </span>
                         <input
                             type="text"
                             placeholder="Навыки"
-                            {...register('skills', {
-                                required: true,
-                            })}
+                            {...register('skills')}
                         />
 
                         <button type="submit">Опубликовать</button>

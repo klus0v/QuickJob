@@ -1,9 +1,10 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import NewsService from '../../services/orders.service';
+import OrdersService from '../../services/orders.service';
 import {
     ApiQueryParamsOrders,
     FoundItemOrder,
     FrontObject,
+    Job,
 } from '../../constants/types';
 
 const ORDERS_STATE: FrontObject = {
@@ -15,7 +16,18 @@ export const getOrdersThunk = createAsyncThunk(
     async function (_, { rejectWithValue, getState }) {
         try {
             const { search } = getState() as { search: ApiQueryParamsOrders };
-            const response = await NewsService.getNews(search);
+            const response = await OrdersService.getOrders(search);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    },
+);
+export const postOrdersThunk = createAsyncThunk(
+    'orders/postOrders',
+    async function (data: Job, { rejectWithValue }) {
+        try {
+            const response = await OrdersService.postOrder(data);
             return response;
         } catch (error) {
             return rejectWithValue(error);
@@ -56,7 +68,11 @@ const newsSlice = createSlice({
                 state.foundItems = [];
                 state.totalCount = 0;
             })
-            .addCase(getOrdersThunk.rejected, (state, action) => {});
+            .addCase(getOrdersThunk.rejected, (state, action) => {})
+            .addCase(postOrdersThunk.fulfilled, (state, action) => {})
+            .addCase(postOrdersThunk.rejected, (state, action) => {
+                console.log(action);
+            });
     },
 });
 
