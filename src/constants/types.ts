@@ -44,7 +44,7 @@ export interface Job {
 }
 
 export interface UserResponse {
-    // id: string;
+    id: string;
     userId: string;
     orderId: string;
     userFio: string;
@@ -79,6 +79,7 @@ export interface FoundItemOrder {
 export interface FrontObject {
     foundItems: FoundItemOrder[];
     totalCount: number;
+    item?: FoundItemOrder;
 }
 
 export interface ApiQueryParamsOrders {

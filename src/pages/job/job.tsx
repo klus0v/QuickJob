@@ -4,19 +4,35 @@ import Layout from '../../components/layout/layout';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Responses from './rightCard/responses';
 import Contacts from './rightCard/contacts';
-import { FoundItemOrder } from '../../constants/types';
 import { formatDateTime } from '../../shared/regex';
 import { PaymentType } from '../../constants/enums';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../shared/hooks';
+import { getOrderItemThunk } from '../../store/slices/orders.slice';
 
 function Job() {
     const { id } = useParams();
+    console.log(id);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const location = useLocation();
-    const { state } = location as { state: FoundItemOrder };
+    useEffect(() => {
+        if (!isAuth) navigate('/');
+        id && dispatch(getOrderItemThunk(id));
+    }, []);
 
-    const startDateTime = formatDateTime(state.startDateTime);
-    const endDateTime = formatDateTime(state.endDateTime);
+    const isAuth = useAppSelector(state => state.auth.isAuth);
+    const orderItem = useAppSelector(state => state.orders.item);
+    const isCurrentUserCustomer = orderItem?.currentUserIsCustomer;
+
+    const startDateTime = orderItem && formatDateTime(orderItem.startDateTime);
+    const endDateTime = orderItem && formatDateTime(orderItem.endDateTime);
+
+    const renderResponseType = isCurrentUserCustomer ? (
+        <Responses {...orderItem.responses} />
+    ) : (
+        <Contacts />
+    );
 
     return (
         <div className={styles.container}>
@@ -33,50 +49,58 @@ function Job() {
                 >
                     &lt; Назад к списку
                 </div>
-                <div className={styles.mainCard}>
-                    <div className={styles.leftCard}>
-                        <div className={styles.titleCard}>{state.title}</div>
-                        <div className={styles.price}>
-                            {state.price} руб/час
-                        </div>
-                        <div className={styles.description}>
-                            <div className={styles.heading}>Описание</div>
-                            <div>{state.description}</div>
-                            <div className={styles.heading}>Дата</div>
-                            <div>
-                                с {startDateTime} по {endDateTime}
+                {orderItem && (
+                    <div className={styles.mainCard}>
+                        <div className={styles.leftCard}>
+                            <div className={styles.titleCard}>
+                                {orderItem?.title}
                             </div>
-                            <div className={styles.heading}>Занятость</div>
-                            <div>~{state.workHours} ч</div>
-                            <div className={styles.heading}>Работников</div>
-                            <div>
-                                {state.approvedResponsesCount}/{state.limit} чел
+                            <div className={styles.price}>
+                                {orderItem?.price} руб/час
                             </div>
-                            <div className={styles.heading}>Оплата</div>
-                            <div>
-                                {state.paymentType == PaymentType.Card
-                                    ? 'безналичными'
-                                    : 'наличными'}
+                            <div className={styles.description}>
+                                <div className={styles.heading}>Описание</div>
+                                <div>{orderItem?.description}</div>
+                                <div className={styles.heading}>Дата</div>
+                                <div>
+                                    с{startDateTime}
+                                    по
+                                    {endDateTime}
+                                </div>
+                                <div className={styles.heading}>Занятость</div>
+                                <div>~{orderItem?.workHours} ч</div>
+                                <div className={styles.heading}>Работников</div>
+                                <div>
+                                    {orderItem?.approvedResponsesCount}/
+                                    {orderItem?.limit} чел
+                                </div>
+                                <div className={styles.heading}>Оплата</div>
+                                <div>
+                                    {orderItem?.paymentType == PaymentType.Card
+                                        ? 'безналичными'
+                                        : 'наличными'}
+                                </div>
+                                {/* <div className={styles.heading}>Навыки</div>
+                                <div>
+                                    {orderItem && orderItem.skills
+                                        ? orderItem.skills.join(', ')
+                                        : 'No skills available'}
+                                </div> */}
+                                <div className={styles.heading}>Адрес</div>
+                                <div>{orderItem?.address}</div>
                             </div>
-                            <div className={styles.heading}>Навыки</div>
-                            <div>{state.skills.join(', ')}</div>
-                            <div className={styles.heading}>Адрес</div>
-                            <div>{state.address}</div>
+                            <div className={styles.date}>
+                                {orderItem && orderItem.editDateTime === null
+                                    ? formatDateTime(orderItem.createDateTime)
+                                    : 'изм. ' +
+                                      formatDateTime(
+                                          orderItem?.editDateTime || '',
+                                      )}
+                            </div>
                         </div>
-                        <div className={styles.date}>
-                            {state.editDateTime === null
-                                ? formatDateTime(state.createDateTime)
-                                : 'изм. ' + formatDateTime(state.editDateTime)}
-                        </div>
+                        {renderResponseType}
                     </div>
-                    <>
-                        {state.currentUserIsCustomer ? (
-                            <Responses />
-                        ) : (
-                            <Contacts />
-                        )}
-                    </>
-                </div>
+                )}
             </div>
         </div>
     );

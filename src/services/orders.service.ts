@@ -51,9 +51,15 @@ const getOrders = async (params: ApiQueryParamsOrders) => {
     return response.data;
 };
 
+const getOrderItem = async (id: string) => {
+    const response = await $api.get(`/users-api/orders/${id}`);
+    return response.data;
+};
+
 const OrdersService = {
     postOrder,
     getOrders,
+    getOrderItem,
 };
 
 export default OrdersService;

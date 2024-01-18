@@ -1,13 +1,14 @@
+import { UserResponse } from '../../../constants/types';
 import styles from './usercard.module.css';
 
-const UserCard = ({ name }: { name: string }) => {
+const UserCard = (user: UserResponse) => {
     const getUser = () => console.log('Get user', name);
 
     return (
         <div className={styles.employerAvatarName}>
             <div className={styles.employerAvatar} />
             <div className={styles.employerNameStar}>
-                <div className={styles.employerName}>{name}</div>
+                <div className={styles.employerName}>{user.userFio}</div>
                 <div className={styles.stars} onClick={getUser}>
                     Принять
                 </div>

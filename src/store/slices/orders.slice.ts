@@ -23,6 +23,17 @@ export const getOrdersThunk = createAsyncThunk(
         }
     },
 );
+export const getOrderItemThunk = createAsyncThunk(
+    'orders/getOrderItem',
+    async function (id: string, { rejectWithValue, getState }) {
+        try {
+            const response = await OrdersService.getOrderItem(id);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    },
+);
 export const postOrdersThunk = createAsyncThunk(
     'orders/postOrders',
     async function (data: Job, { rejectWithValue }) {
@@ -72,6 +83,12 @@ const newsSlice = createSlice({
             .addCase(postOrdersThunk.fulfilled, (state, action) => {})
             .addCase(postOrdersThunk.rejected, (state, action) => {
                 console.log(action);
+            })
+            .addCase(getOrderItemThunk.fulfilled, (state, action) => {
+                state.item = action.payload;
+            })
+            .addCase(getOrderItemThunk.pending, (state, action) => {
+                state.item = {} as FoundItemOrder;
             });
     },
 });

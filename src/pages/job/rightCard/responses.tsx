@@ -1,21 +1,16 @@
 import UserCard from '../../../components/cards/userCard/UserCard';
+import { UserResponse } from '../../../constants/types';
 import styles from '../job.module.css';
 
-const Responses = () => {
+const Responses = (props: UserResponse[]) => {
+    console.log(props);
     return (
         <div className={styles.rightCard}>
             <div className={styles.employerCard}>
                 <span>Отклики</span>
-                <UserCard name="Ангелина Аверина" />
-                <UserCard name="Ангелина Аверина" />
-                <UserCard name="Ангелина Аверина" />
-                <UserCard name="Ангелина Аверина" />
-                <UserCard name="Ангелина Аверина" />
-                <UserCard name="Ангелина Аверина" />
-                <UserCard name="Ангелина Аверина" />
-                <UserCard name="Ангелина Аверина" />
-                <UserCard name="Ангелина Аверина" />
-                <UserCard name="Ангелина Аверина" />
+                {/* {props.map(user => (
+                    <UserCard key={user.id} {...user} />
+                ))} */}
             </div>
             <div className={styles.buttons}>
                 <button className={styles.button}>Закрыть задание</button>

@@ -39,9 +39,7 @@ const VacancyCard = (props: FoundItemOrder) => {
                 </div>
                 <button
                     className={styles.cardButton}
-                    onClick={() =>
-                        navigate(`job/${props.id}`, { state: props })
-                    }
+                    onClick={() => navigate(`/job/${props.id}`)}
                 >
                     Подробнее
                 </button>
