@@ -3,7 +3,6 @@ import { UserResponse } from '../../../constants/types';
 import styles from '../job.module.css';
 
 const Responses = (props: UserResponse[]) => {
-    console.log(props);
     return (
         <div className={styles.rightCard}>
             <div className={styles.employerCard}>

@@ -50,12 +50,12 @@ function App() {
                                 <span>{category.name}</span>
                             </div>
                         ))}
-                        {categories.map((category, index) => (
+                        {/* {categories.map((category, index) => (
                             <div key={index} className={styles.category}>
                                 {category.icon}
                                 <span>{category.name}</span>
                             </div>
-                        ))}
+                        ))} */}
                     </div>
                 </div>
 

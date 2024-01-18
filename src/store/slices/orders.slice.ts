@@ -5,7 +5,9 @@ import {
     FoundItemOrder,
     FrontObject,
     Job,
+    UserInfo,
 } from '../../constants/types';
+import AuthService from '../../services/auth.service';
 
 const ORDERS_STATE: FrontObject = {
     foundItems: [],
@@ -42,6 +44,28 @@ export const postOrdersThunk = createAsyncThunk(
             return response;
         } catch (error) {
             return rejectWithValue(error);
+        }
+    },
+);
+
+export const getUserThunk = createAsyncThunk(
+    'orders/getUser',
+    async function (id: string, { rejectWithValue }) {
+        try {
+            return await AuthService.getUser(id);
+        } catch {
+            return rejectWithValue('Server error!');
+        }
+    },
+);
+
+export const orderResponseFromUserThunk = createAsyncThunk(
+    'orders/orderResponse',
+    async function (id: string, { rejectWithValue }) {
+        try {
+            return await OrdersService.orderResponseFromUser(id);
+        } catch {
+            return rejectWithValue('Server error!');
         }
     },
 );
@@ -89,6 +113,22 @@ const newsSlice = createSlice({
             })
             .addCase(getOrderItemThunk.pending, (state, action) => {
                 state.item = {} as FoundItemOrder;
+            })
+            .addCase(getUserThunk.fulfilled, (state, action) => {
+                state.item.customerInfo = action.payload;
+            })
+            .addCase(getUserThunk.pending, (state, action) => {
+                state.item.customerInfo = {} as UserInfo;
+            })
+            .addCase(
+                orderResponseFromUserThunk.fulfilled,
+                (state, action) => {},
+            )
+            .addCase(orderResponseFromUserThunk.pending, (state, action) => {
+                state.error = '';
+            })
+            .addCase(orderResponseFromUserThunk.rejected, (state, action) => {
+                state.error = action.error;
             });
     },
 });

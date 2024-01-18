@@ -20,9 +20,15 @@ const registration = async (data: RegisAuth) => {
     return responseConf.data;
 };
 
+const getUser = async (id: string) => {
+    const response = await $api.get(`/cabinet-api/UserInfo/base?userId=${id}`);
+    return response.data;
+};
+
 const AuthService = {
     login,
     registration,
+    getUser,
 };
 
 export default AuthService;

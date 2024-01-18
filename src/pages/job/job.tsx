@@ -12,16 +12,14 @@ import { getOrderItemThunk } from '../../store/slices/orders.slice';
 
 function Job() {
     const { id } = useParams();
-    console.log(id);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!isAuth) navigate('/');
+        // if (!isAuth) navigate('/');
         id && dispatch(getOrderItemThunk(id));
     }, []);
 
-    const isAuth = useAppSelector(state => state.auth.isAuth);
     const orderItem = useAppSelector(state => state.orders.item);
     const isCurrentUserCustomer = orderItem?.currentUserIsCustomer;
 

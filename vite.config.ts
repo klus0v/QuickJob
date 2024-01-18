@@ -16,6 +16,11 @@ export default defineConfig({
                 changeOrigin: true,
                 rewrite: path => path.replace(/^\/users-api/, ''),
             },
+            '/cabinet-api': {
+                target: 'http://51.250.93.99:4444',
+                changeOrigin: true,
+                rewrite: path => path.replace(/^\/cabinet-api/, ''),
+            },
         },
     },
 });

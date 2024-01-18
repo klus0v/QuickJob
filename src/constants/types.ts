@@ -51,6 +51,19 @@ export interface UserResponse {
     status: string;
 }
 
+export interface UserInfo {
+    id: string;
+    fio: string;
+    avatarUrl: string;
+    phone: string;
+    email: string;
+    telegram: {
+        tgId: string;
+        tgUsername: string;
+    };
+    address: string;
+}
+
 export interface FoundItemOrder {
     id: string;
     approvedResponsesCount: number;
@@ -74,12 +87,14 @@ export interface FoundItemOrder {
     price: number;
     createDateTime: Date;
     editDateTime: Date | null;
+    customerInfo: UserInfo | null;
 }
 
 export interface FrontObject {
     foundItems: FoundItemOrder[];
     totalCount: number;
     item?: FoundItemOrder;
+    error?: string;
 }
 
 export interface ApiQueryParamsOrders {
