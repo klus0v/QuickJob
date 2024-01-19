@@ -5,14 +5,17 @@ import { LiaTelegram } from 'react-icons/lia';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import AuthPopup from '../../../components/popups/auth/auth';
 import {
+    deleteOrderResponseFromUserThunk,
+    getOrderItemThunk,
     getUserThunk,
     orderResponseFromUserThunk,
 } from '../../../store/slices/orders.slice';
 
 const Contacts = () => {
+    const { id } = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -22,6 +25,9 @@ const Contacts = () => {
     );
     const orderItem = useAppSelector(state => state.orders.item);
     const [isOpenAuthPOpup, setOpenAuthPOpup] = useState(false);
+    const [isApproved, setIsApproved] = useState(
+        orderItem?.responseStatus === 'Approved',
+    );
 
     useEffect(() => {
         orderItem?.customerId !== undefined &&
@@ -29,12 +35,20 @@ const Contacts = () => {
     }, [orderItem?.customerId]);
 
     const dispatchResponse = () => {
-        if (isAuth) {
+        if (isAuth && !isApproved) {
             orderItem && dispatch(orderResponseFromUserThunk(orderItem.id));
+            setIsApproved(true);
+        } else if (isAuth && isApproved) {
+            orderItem &&
+                dispatch(deleteOrderResponseFromUserThunk(orderItem.id));
+            id && dispatch(getOrderItemThunk(id));
+            setIsApproved(false);
         } else {
             setOpenAuthPOpup(true);
         }
     };
+
+    console.log(orderItem?.responseStatus);
 
     return (
         <div className={styles.rightCard}>
@@ -82,7 +96,7 @@ const Contacts = () => {
             </div>
             <div className={styles.buttons}>
                 <button className={styles.button} onClick={dispatchResponse}>
-                    Откликнуться
+                    {isApproved ? 'Отказаться' : 'Откликнуться'}
                 </button>
                 <button className={styles.button}>Связаться</button>
             </div>

@@ -51,8 +51,34 @@ const getOrders = async (params: ApiQueryParamsOrders) => {
     return response.data;
 };
 
+const deleteOrder = async (id: string) => {
+    const response = await $api.delete(`/users-api/orders/${id}`);
+    return response.data;
+};
+
 const orderResponseFromUser = async (id: string) => {
     const response = await $api.put(`/users-api/Orders/${id}/responses`);
+    return response.data;
+};
+
+const deleteOrderResponseFromUser = async (id: string) => {
+    const response = await $api.delete(`/users-api/Orders/${id}/responses`);
+    return response.data;
+};
+
+const orderResponseForUser = async ({
+    orderId,
+    responseId,
+    isApprove,
+}: {
+    orderId: string;
+    responseId: string;
+    isApprove: boolean;
+}) => {
+    const answer = isApprove ? 'approve' : 'reject';
+    const response = await $api.put(
+        `/users-api/Orders/${orderId}/responses/${responseId}/${answer}`,
+    );
     return response.data;
 };
 
@@ -66,6 +92,9 @@ const OrdersService = {
     getOrders,
     getOrderItem,
     orderResponseFromUser,
+    deleteOrder,
+    orderResponseForUser,
+    deleteOrderResponseFromUser,
 };
 
 export default OrdersService;

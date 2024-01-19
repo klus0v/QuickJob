@@ -36,6 +36,17 @@ export const getOrderItemThunk = createAsyncThunk(
         }
     },
 );
+export const deleteOrderItemThunk = createAsyncThunk(
+    'orders/deleteOrderItem',
+    async function (id: string, { rejectWithValue, getState }) {
+        try {
+            const response = await OrdersService.deleteOrder(id);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    },
+);
 export const postOrdersThunk = createAsyncThunk(
     'orders/postOrders',
     async function (data: Job, { rejectWithValue }) {
@@ -60,7 +71,7 @@ export const getUserThunk = createAsyncThunk(
 );
 
 export const orderResponseFromUserThunk = createAsyncThunk(
-    'orders/orderResponse',
+    'orders/orderResponseFrom',
     async function (id: string, { rejectWithValue }) {
         try {
             return await OrdersService.orderResponseFromUser(id);
@@ -70,29 +81,39 @@ export const orderResponseFromUserThunk = createAsyncThunk(
     },
 );
 
+export const deleteOrderResponseFromUserThunk = createAsyncThunk(
+    'orders/deleteOrderResponseFrom',
+    async function (id: string, { rejectWithValue }) {
+        try {
+            return await OrdersService.deleteOrderResponseFromUser(id);
+        } catch {
+            return rejectWithValue('Server error!');
+        }
+    },
+);
+
+export const orderResponseForUserThunk = createAsyncThunk(
+    'orders/orderResponseFor',
+    async function (
+        data: {
+            orderId: string;
+            responseId: string;
+            isApprove: boolean;
+        },
+        { rejectWithValue },
+    ) {
+        try {
+            return await OrdersService.orderResponseForUser(data);
+        } catch {
+            return rejectWithValue('Server error!');
+        }
+    },
+);
+
 const newsSlice = createSlice({
     name: 'orders',
     initialState: ORDERS_STATE,
-    reducers: {
-        addOrder: (state, action: PayloadAction<FoundItemOrder>) => {
-            state.foundItems.push(action.payload);
-            state.totalCount += 1;
-        },
-        removeOrder: (state, action: PayloadAction<string>) => {
-            state.foundItems = state.foundItems.filter(
-                order => order.id !== action.payload,
-            );
-            state.totalCount -= 1;
-        },
-        updateOrder: (state, action: PayloadAction<FoundItemOrder>) => {
-            const index = state.foundItems.findIndex(
-                order => order.id === action.payload.id,
-            );
-            if (index !== -1) {
-                state.foundItems[index] = action.payload;
-            }
-        },
-    },
+    reducers: {},
     extraReducers: builder => {
         builder
             .addCase(getOrdersThunk.fulfilled, (state, action) => {
@@ -104,9 +125,15 @@ const newsSlice = createSlice({
                 state.totalCount = 0;
             })
             .addCase(getOrdersThunk.rejected, (state, action) => {})
-            .addCase(postOrdersThunk.fulfilled, (state, action) => {})
+            .addCase(postOrdersThunk.fulfilled, (state, action) => {
+                state.error = 'fulfilled';
+            })
+            .addCase(postOrdersThunk.pending, (state, action) => {
+                state.error = 'pending';
+            })
             .addCase(postOrdersThunk.rejected, (state, action) => {
                 console.log(action);
+                state.error = 'error';
             })
             .addCase(getOrderItemThunk.fulfilled, (state, action) => {
                 state.item = action.payload;
@@ -129,9 +156,12 @@ const newsSlice = createSlice({
             })
             .addCase(orderResponseFromUserThunk.rejected, (state, action) => {
                 state.error = action.error;
+            })
+            .addCase(deleteOrderItemThunk.fulfilled, (state, action) => {
+                state.error = '';
             });
     },
 });
 
-export const { addOrder, removeOrder, updateOrder } = newsSlice.actions;
+export const {} = newsSlice.actions;
 export default newsSlice.reducer;

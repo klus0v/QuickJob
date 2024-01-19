@@ -70,7 +70,7 @@ export interface FoundItemOrder {
     totalResponsesCount: number;
     customerId: string;
     responses: UserResponse[];
-    // responseStatus: string;
+    responseStatus: string;
     fileUrls: string[];
     isActive: boolean;
     paymentType: PaymentType;

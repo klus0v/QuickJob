@@ -27,7 +27,7 @@ function Job() {
     const endDateTime = orderItem && formatDateTime(orderItem.endDateTime);
 
     const renderResponseType = isCurrentUserCustomer ? (
-        <Responses {...orderItem.responses} />
+        <Responses responses={orderItem.responses} />
     ) : (
         <Contacts />
     );

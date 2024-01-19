@@ -2,11 +2,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Layout from '../../components/layout/layout';
 import styles from './createJob.module.css';
 import { Job } from '../../constants/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../shared/hooks';
 import AuthPopup from '../../components/popups/auth/auth';
 import { PaymentType } from '../../constants/enums';
 import { postOrdersThunk } from '../../store/slices/orders.slice';
+import { useNavigate } from 'react-router-dom';
 
 function CreateJob() {
     const {
@@ -16,9 +17,19 @@ function CreateJob() {
     } = useForm<Job>();
 
     const dispatch = useAppDispatch();
+    const error = useAppSelector(state => state.orders.error);
+    const navigate = useNavigate();
 
-    const onSubmit: SubmitHandler<Job> = data =>
-        dispatch(postOrdersThunk(data));
+    const onSubmit: SubmitHandler<Job> = async data => {
+        await dispatch(postOrdersThunk(data));
+        navigate('/');
+    };
+
+    useEffect(() => {
+        if (error === '') {
+            navigate('/');
+        }
+    }, [error]);
 
     const isAuth = useAppSelector(state => state.auth.isAuth);
     const [isOpenAuthPOpup, setOpenAuthPOpup] = useState(!isAuth);
