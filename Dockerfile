@@ -1,8 +1,8 @@
-FROM node:16-alpine
-RUN apk add --no-cache make gcc g++ python3
+FROM node:18-alpine
 WORKDIR /app
 COPY . .
 RUN npm i
 EXPOSE 80
+EXPOSE 8080
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD [ "npm", "run", "dev" ]
