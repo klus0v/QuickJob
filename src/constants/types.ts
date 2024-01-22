@@ -29,6 +29,7 @@ export interface AuthState {
 }
 
 export interface Job {
+    id?: string;
     address: string;
     categories: string[];
     description: string;

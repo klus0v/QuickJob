@@ -1,0 +1,76 @@
+.container {
+    font-family: 'Montserrat Variable';
+}
+
+/* INTRO */
+.intro {
+    position: absolute;
+    width: 100vw;
+    height: 480px;
+    background-color: #2951b6;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 20px;
+    padding-top: 64px;
+    z-index: -1;
+
+    background-image: url('../../assets/intro_university.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.main {
+    margin: 54px 0;
+    padding-top: 20px;
+    background-color: #e4ecff;
+    border-radius: 16px;
+    padding: 30px;
+}
+.main h2 {
+    color: #002fa7;
+}
+.employerCard {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px 20px;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.wrapper label {
+    margin-top: 16px;
+    font-weight: 600;
+}
+.wrapper input,
+.wrapper select {
+    margin-top: 8px;
+    border: 1px solid #b9b7b7;
+    outline: none;
+    padding: 12px 8px;
+    border-radius: 8px;
+}
+.wrapper textarea {
+    margin-top: 8px;
+    border: 1px solid #b9b7b7;
+    outline: none;
+    padding: 12px 8px;
+    border-radius: 8px;
+    resize: vertical;
+}
+.wrapper button {
+    height: 32px;
+    background-color: #2664ff;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-weight: 500;
+    margin-top: 32px;
+}
+.error {
+    color: red;
+    font-size: 12px;
+    transform: translateY(6px);
+}

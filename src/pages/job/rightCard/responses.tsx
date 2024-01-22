@@ -14,6 +14,7 @@ const Responses = ({ responses }: { responses: UserResponse[] }) => {
         orderItem && dispatch(deleteOrderItemThunk(orderItem.id));
         navigate(-1);
     };
+    const editJob = () => navigate(`/edit`, { state: orderItem });
 
     return (
         <div className={styles.rightCard}>
@@ -26,7 +27,9 @@ const Responses = ({ responses }: { responses: UserResponse[] }) => {
                 <button className={styles.button} onClick={deleteOrder}>
                     Удалить задание
                 </button>
-                <button className={styles.button}>Редактировать задание</button>
+                <button className={styles.button} onClick={editJob}>
+                    Редактировать задание
+                </button>
             </div>
         </div>
     );

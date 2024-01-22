@@ -17,6 +17,16 @@ export const loginThunk = createAsyncThunk(
         }
     },
 );
+export const logoutThunk = createAsyncThunk(
+    'auth/logout',
+    async function (_, { rejectWithValue }) {
+        try {
+            return await AuthService.logout();
+        } catch {
+            return rejectWithValue('Server Error!');
+        }
+    },
+);
 export const registrationThunk = createAsyncThunk(
     'auth/registration',
     async function (data: RegisAuth, { rejectWithValue }) {
@@ -57,6 +67,11 @@ const authSlice = createSlice({
                 }
             })
 
+            .addCase(logoutThunk.fulfilled, (state, action) => {
+                state.isAuth = false;
+                state.accessToken = undefined;
+                localStorage.removeItem('accessToken');
+            })
             .addCase(registrationThunk.fulfilled, (state, action) => {
                 state.isAuth = true;
                 state.accessToken = action.payload.accessToken;

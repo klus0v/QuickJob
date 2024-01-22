@@ -40,19 +40,17 @@ const SortCard = () => {
                 Сортировать <HiOutlineSwitchVertical />
             </div>
             <div className={styles.radioButtons}>
-                {sorting.map(sort => (
-                    <>
-                        <div className={styles.radioButton}>
-                            <input
-                                type="radio"
-                                id={sort.value}
-                                name={sort.name}
-                                value={sort.value}
-                                defaultChecked={sort.defaultChecked}
-                            />
-                            <label htmlFor={sort.value}>{sort.text}</label>
-                        </div>
-                    </>
+                {sorting.map((sort, index) => (
+                    <div key={index} className={styles.radioButton}>
+                        <input
+                            type="radio"
+                            id={sort.value}
+                            name={sort.name}
+                            value={sort.value}
+                            defaultChecked={sort.defaultChecked}
+                        />
+                        <label htmlFor={sort.value}>{sort.text}</label>
+                    </div>
                 ))}
             </div>
         </div>

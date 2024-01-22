@@ -1,12 +1,17 @@
-import { TbLogin2, TbSearch } from 'react-icons/tb';
+import { TbLogin2, TbLogout } from 'react-icons/tb';
 import styles from './layout.module.css';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { useState } from 'react';
 import AuthPopup from '../popups/auth/auth';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../shared/hooks';
+import { logoutThunk } from '../../store/slices/auth.slice';
 
 const Layout = () => {
     const [isOpenAuthPOpup, setOpenAuthPOpup] = useState(false);
+    const isAuth = useAppSelector(state => state.auth.isAuth);
+    const dispatch = useAppDispatch();
+    const logout = () => dispatch(logoutThunk());
 
     return (
         <>
@@ -29,15 +34,25 @@ const Layout = () => {
                     </div>
 
                     <div className={styles.icons}>
-                        <div>
+                        {/* <div>
                             <TbSearch />
                         </div>
                         <div>
                             <IoNotificationsOutline />
-                        </div>
-                        <div onClick={() => setOpenAuthPOpup(!isOpenAuthPOpup)}>
-                            <TbLogin2 style={{ marginLeft: '-4px' }} />
-                        </div>
+                        </div> */}
+                        {!isAuth ? (
+                            <div
+                                onClick={() =>
+                                    setOpenAuthPOpup(!isOpenAuthPOpup)
+                                }
+                            >
+                                <TbLogin2 style={{ marginLeft: '-4px' }} />
+                            </div>
+                        ) : (
+                            <div onClick={logout}>
+                                <TbLogout style={{ marginLeft: '+4px' }} />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

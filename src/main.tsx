@@ -10,6 +10,7 @@ import Profile from './pages/profile/profile.tsx';
 import CreateJob from './pages/createJob/createJob.tsx';
 import { Provider } from 'react-redux';
 import store from './store/store.ts';
+import EditJob from './pages/editJob/editJob.tsx';
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
     {
         path: '/job/:id',
         element: <Job />,
+    },
+    {
+        path: '/edit',
+        element: <EditJob />,
     },
 ]);
 

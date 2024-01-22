@@ -4,7 +4,6 @@ import orders from '../data/orders.data';
 import $api from './instance';
 
 const postOrder = async (data: Job) => {
-    console.log(data);
     const formData = new FormData();
 
     // Append Files
@@ -39,6 +38,50 @@ const postOrder = async (data: Job) => {
             'Content-Type': 'multipart/form-data',
         },
     });
+
+    return response.data;
+};
+const patchOrder = async (data: Job) => {
+    const formData = new FormData();
+
+    // Append Files
+    if (data.files) {
+        formData.append('Files', data.files);
+    }
+    if (data.id !== undefined) {
+        formData.append('orderId ', data.id);
+    }
+
+    // Append other fields
+    formData.append('Title', data.title);
+    formData.append('Description', data.description);
+    formData.append('Address', data.address);
+    formData.append(
+        'StartDateTime',
+        new Date(data.startDateTime).toISOString(),
+    );
+    formData.append('EndDateTime', new Date(data.endDateTime).toISOString());
+
+    formData.append('Categories', JSON.stringify(data.categories));
+    formData.append('Skills', JSON.stringify(data.skills));
+    formData.append('Limit', data.limit.toString());
+
+    formData.append('PaymentType', PaymentType[data.paymentType]);
+
+    formData.append('WorkHours', data.workHours.toString());
+    formData.append('Price', data.price.toString());
+
+    console.log(formData);
+
+    const response = await $api.patch(
+        `/users-api/orders/${data.id}`,
+        formData,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        },
+    );
 
     return response.data;
 };
@@ -95,6 +138,7 @@ const OrdersService = {
     deleteOrder,
     orderResponseForUser,
     deleteOrderResponseFromUser,
+    patchOrder,
 };
 
 export default OrdersService;
