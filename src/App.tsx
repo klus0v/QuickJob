@@ -4,17 +4,28 @@ import Layout from './components/layout/layout';
 import VacancyCard from './components/cards/vacancyCard/vacancyCard';
 import SortCard from './components/cards/sortMainCard/sortCard';
 import { categories } from './data/categories.data';
-import { useEffect } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { getOrdersThunk } from './store/slices/orders.slice';
 import { useAppDispatch, useAppSelector } from './shared/hooks';
+import { setQuery } from './store/slices/search.slice';
+import { ApiQueryParamsOrders } from './constants/types';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 function App() {
     const dispatch = useAppDispatch();
     const orders = useAppSelector(state => state.orders);
+    const query = useAppSelector(state => state.search.query);
+    const { register, handleSubmit } = useForm<ApiQueryParamsOrders>();
+
+    const onSubmit: SubmitHandler<ApiQueryParamsOrders> = (
+        data: ApiQueryParamsOrders,
+    ) => {
+        data.query && dispatch(setQuery(data.query));
+    };
 
     useEffect(() => {
         dispatch(getOrdersThunk());
-    }, []);
+    }, [query]);
     return (
         <div className={styles.container}>
             <Layout />
@@ -27,13 +38,17 @@ function App() {
                         что-то полезное
                     </div>
 
-                    <div className={styles.search}>
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className={styles.search}
+                    >
                         <input
-                            type="search"
+                            type="text"
                             placeholder="Поиск по ключевым словам"
+                            {...register('query')}
                         />
-                        <button>Найти</button>
-                    </div>
+                        <button type="submit">Найти</button>
+                    </form>
                     <div className={styles.exampleSearchText}>
                         Например: <span>что-то там</span>
                     </div>
@@ -50,12 +65,6 @@ function App() {
                                 <span>{category.name}</span>
                             </div>
                         ))}
-                        {/* {categories.map((category, index) => (
-                            <div key={index} className={styles.category}>
-                                {category.icon}
-                                <span>{category.name}</span>
-                            </div>
-                        ))} */}
                     </div>
                 </div>
 
