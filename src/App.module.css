@@ -74,7 +74,7 @@
     transform: translateY(-150px);
 }
 .mainCategories {
-    min-height: 256px;
+    min-height: 150px;
     background-color: #e4ecff;
     border-radius: 16px;
     padding: 30px;

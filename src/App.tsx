@@ -15,6 +15,7 @@ function App() {
     const dispatch = useAppDispatch();
     const orders = useAppSelector(state => state.orders);
     const query = useAppSelector(state => state.search.query);
+    const type = useAppSelector(state => state.search.sortField);
     const { register, handleSubmit } = useForm<ApiQueryParamsOrders>();
 
     const onSubmit: SubmitHandler<ApiQueryParamsOrders> = (
@@ -25,7 +26,8 @@ function App() {
 
     useEffect(() => {
         dispatch(getOrdersThunk());
-    }, [query]);
+    }, [query, type]);
+
     return (
         <div className={styles.container}>
             <Layout />
